@@ -27,7 +27,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Config::Scoped has the following highlights as a configuration file
 parser:
-
 - Complex recursive datastructures to any extent with scalars, lists
   and hashes as elements,
 - As a subset parses any complex Perl datastructures (no references
@@ -55,8 +54,37 @@ parser:
 - Exception based error handling,
 - etc.
 
-# %description -l pl.UTF-8
-# TODO
+%description -l pl.UTF-8
+Config::Scoped ma następujące cechy jako analizator plików
+konfiguracyjnych:
+- dowolnie złożone rekurencyjne struktury danych z elementami będącymi
+  skalarami, listami i haszami,
+- analizowanie dowolnie złożone perlowe struktury danych (bez
+  referencji i globów) bez użycia do czy require,
+- dołączanie plików ze sprawdzaniem rekurencji,
+- kontrolowane rozwijanie makr w tokenach ujętych w cudzysłowy,
+- przypisywanie parametrów i obsługa dyrektyw pragma z kontekstem
+  leksykalnym,
+- obsługa dowolnych perlowych konstrukcji cytowania z użyciem '', "" i
+  dokumentów włączanych <<,
+- wykonywanie kodu perlowego w segmentach Safe,
+- zapamiętywanie (cache) i odtwarzanie z kontrolą MD5 w celu wykrycia
+  zmian w oryginalnych plikach konfiguracyjnych,
+- kontrola poprawności makr, parametrów i redefinicji deklaracji może
+  być przeprowadzana zależnie od wiedzy semantycznej,
+- standardowe sprawdzanie uprawnień i własności plików pod kątem
+  bezpieczeństwa; może być zmienione,
+- dobra kontrola ostrzeżeń o redefinicjach z użyciem dyrektyw pragma,
+- łatwe dziedziczenie, można tworzyć podklasy do tworzenia
+  analizatorów o wyspecjalizowanym sprawdzaniu poprawności,
+- łagodna kontrola składni, średniki i/lub przecinki nie są zawsze
+  niezbędne do zakończenia instrukcji czy elementu listy, jeśli koniec
+  da się odgadnąć w inny sposób, jak np. z końców linii, nawiasów
+  zamykających itp.,
+- dobrze wskazujące komunikaty o błędach składni, nawet wewnątrz
+  plików dołączanych, z poprawnymi numerami linii i nazwami plików,
+- obsługa błędów oparta na wyjątkach,
+- itd.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
