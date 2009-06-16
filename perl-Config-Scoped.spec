@@ -8,18 +8,19 @@
 Summary:	Config::Scoped - feature rich configuration file parser
 Summary(pl.UTF-8):	Config::Scoped - bogaty w możliwości analizator plików konfiguracyjnych
 Name:		perl-Config-Scoped
-Version:	0.11
-Release:	0.1
+Version:	0.12
+Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/Config/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	1dce2be606897ea9912f5e19dffe002f
+# Source0-md5:	80d56f8b1ed0e252b5aa9c40b5ad934f
 URL:		http://search.cpan.org/dist/Config-Scoped/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 %if %{with tests}
-BuildRequires:	perl-Parse-RecDescent
+BuildRequires:	perl-Error
+BuildRequires:	perl-Parse-RecDescent >= 1.94
 %endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
