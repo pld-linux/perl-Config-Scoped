@@ -8,14 +8,15 @@
 Summary:	Config::Scoped - feature rich configuration file parser
 Summary(pl.UTF-8):	Config::Scoped - bogaty w możliwości analizator plików konfiguracyjnych
 Name:		perl-Config-Scoped
-Version:	0.13
+Version:	0.21
 Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/Config/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	02c05d82bf3c11e7a21f4866b6280341
+# Source0-md5:	94ce561e368ffaff3f1f66896d6d0b3f
 URL:		http://search.cpan.org/dist/Config-Scoped/
+BuildRequires:	perl-Module-Build
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 %if %{with tests}
@@ -91,17 +92,20 @@ konfiguracyjnych:
 %setup -q -n %{pdir}-%{pnam}-%{version}
 
 %build
-%{__perl} Makefile.PL \
-	INSTALLDIRS=vendor
-%{__make}
+%{__perl} Build.PL \
+	destdir=$RPM_BUILD_ROOT \
+	installdirs=vendor
+./Build
 
-%{?with_tests:%{__make} test}
+%{?with_tests:./Build test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+./Build install
+
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a example $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -112,3 +116,4 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorlib}/Config/*.pm
 %{perl_vendorlib}/Config/Scoped
 %{_mandir}/man3/*
+%{_examplesdir}/%{name}-%{version}
